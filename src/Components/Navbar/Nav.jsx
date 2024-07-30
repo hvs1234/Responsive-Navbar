@@ -3,8 +3,14 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Nav.css";
+import NavLink from "../../APIs/NavAPI";
 
 const Nav = () => {
+  // API
+  // -----------------------------------------NavAPI---------------------------------------------
+
+  const [navlink] = useState(NavLink);
+
   // Responsive Navbar
 
   const [isActive, setIsActive] = useState(false);
@@ -28,42 +34,13 @@ const Nav = () => {
         </div>
         <nav className="navbar">
           <ul className="flex items-center gap-[4rem]">
-            <Link
-              className="navlink text-[1.6rem] text-[white] font-normal hover:underline hover:text-[goldenrod] transition-all duration-[0.3s] ease-linear"
-              to={"/"}
-            >
-              Home
-            </Link>
-            <Link
-              className="navlink text-[1.6rem] text-[white] font-normal hover:underline hover:text-[goldenrod] transition-all duration-[0.3s] ease-linear"
-              to={"/"}
-            >
-              About
-            </Link>
-            <Link
-              className="navlink text-[1.6rem] text-[white] font-normal hover:underline hover:text-[goldenrod] transition-all duration-[0.3s] ease-linear"
-              to={"/"}
-            >
-              Service
-            </Link>
-            <Link
-              className="navlink text-[1.6rem] text-[white] font-normal hover:underline hover:text-[goldenrod] transition-all duration-[0.3s] ease-linear"
-              to={"/"}
-            >
-              Product
-            </Link>
-            <Link
-              className="navlink text-[1.6rem] text-[white] font-normal hover:underline hover:text-[goldenrod] transition-all duration-[0.3s] ease-linear"
-              to={"/"}
-            >
-              Collection
-            </Link>
-            <Link
-              className="navlink text-[1.6rem] text-[white] font-normal hover:underline hover:text-[goldenrod] transition-all duration-[0.3s] ease-linear"
-              to={"/"}
-            >
-              Contact
-            </Link>
+            {navlink.map((e) => {
+              return (
+                <Link className={`text-[1.6rem] ${e.classname}`} to={e.to} key={e.id}>
+                  {e.name}
+                </Link>
+              );
+            })}
           </ul>
         </nav>
       </header>
